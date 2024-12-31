@@ -40,13 +40,14 @@ class Configuration(sipconfig.Configuration):
 
         sipconfig.Configuration.__init__(self, [pyqtconfig])
 
-        macros = sipconfig._default_macros.copy()
+        macros = copy(sipconfig._default_macros)
         macros['INCDIR_QT'] = qtconfig['QT_INSTALL_HEADERS']
         macros['LIBDIR_QT'] = qtconfig['QT_INSTALL_LIBS']
         macros['MOC'] = 'moc-qt5' if find_executable('moc-qt5') else 'moc'
         macros['CC'] = cc
         macros['CXX'] = cxx
         macros['LINK'] = cxx
+        macros['LINK_SHLIB'] = cxx
         self.set_build_macros(macros)
 
 
